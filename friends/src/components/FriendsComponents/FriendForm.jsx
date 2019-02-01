@@ -6,9 +6,14 @@ import { handleTextInputChange, addFriend } from "../../store/actions";
 
 const FriendForm = props => {
   const addFriend = e => {
+    // To avoid page reload
+    e.preventDefault();
+
     // Check for empty name input
-    if (!props.newName) {
-      alert("Please enter a name for your friend first.");
+    if (!props.newFirstName) {
+      alert("Please enter a first name for your friend first.");
+    } else if (!props.newLastName) {
+      alert("Please enter a last name for your friend first.");
     } else if (!props.newAge) {
       // Check for empty age input
       alert("Please enter an age value for your friend first.");
@@ -18,7 +23,12 @@ const FriendForm = props => {
     } else if (isNaN(props.newAge) || props.newAge < 0) {
       alert("Please enter a valid age value.");
     } else {
-      props.addFriend(props.newName, props.newAge, props.newEmail);
+      props.addFriend(
+        props.newFirstName,
+        props.newLastName,
+        props.newAge,
+        props.newEmail
+      );
     }
   };
 
@@ -27,18 +37,36 @@ const FriendForm = props => {
       <div className="friends-app__new-info-form__field">
         <label
           className="friends-app__new-info-form__field__label"
-          htmlFor="newName"
+          htmlFor="newFirstName"
         >
-          Name:
+          First Name:
         </label>
         <input
           className="friends-app__new-info-form__field__input"
-          id="newName"
+          id="newFirstName"
           type="text"
           placeholder="Enter your friend's name"
           required
-          name="newName"
-          value={props.newName}
+          name="newFirstName"
+          value={props.newFirstName}
+          onChange={props.handleTextInputChange}
+        />
+      </div>
+      <div className="friends-app__new-info-form__field">
+        <label
+          className="friends-app__new-info-form__field__label"
+          htmlFor="newLastName"
+        >
+          Last Name:
+        </label>
+        <input
+          className="friends-app__new-info-form__field__input"
+          id="newLastName"
+          type="text"
+          placeholder="Enter your friend's name"
+          required
+          name="newLastName"
+          value={props.newLastName}
           onChange={props.handleTextInputChange}
         />
       </div>
@@ -87,7 +115,8 @@ const FriendForm = props => {
 };
 
 FriendForm.propTypes = {
-  newName: PropTypes.string.isRequired,
+  newFirstName: PropTypes.string.isRequired,
+  newLastName: PropTypes.string.isRequired,
   // Allow string type to be able to set controlled age input to be empty
   newAge: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   newEmail: PropTypes.string.isRequired,
@@ -97,7 +126,8 @@ FriendForm.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    newName: state.friendsReducer.newName,
+    newFirstName: state.friendsReducer.newFirstName,
+    newLastName: state.friendsReducer.newLastName,
     newAge: state.friendsReducer.newAge,
     newEmail: state.friendsReducer.newEmail
   };

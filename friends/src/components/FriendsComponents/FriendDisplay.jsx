@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 const FriendDisplay = props => {
   return props.selectedFriend ? (
     <div>
-      <h2>{props.selectedFriend.name}</h2>
+      <h2>{`${props.selectedFriend.firstname} ${
+        props.selectedFriend.lastname
+      }`}</h2>
       <div>
         <span>Age: </span>
         <span>{props.selectedFriend.age}</span>
@@ -23,7 +25,8 @@ const FriendDisplay = props => {
 FriendDisplay.propTypes = {
   selectedFriend: PropTypes.shape({
     id: PropTypes.string,
-    name: PropTypes.string,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
     age: PropTypes.number,
     email: PropTypes.string
   })

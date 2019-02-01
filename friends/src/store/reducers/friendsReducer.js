@@ -18,7 +18,8 @@ import {
 } from "../actions/types";
 
 let initialState = {
-  newName: "",
+  newFirstName: "",
+  newLastName: "",
   newAge: "",
   newEmail: "",
   friends: [],
@@ -75,7 +76,11 @@ const friendsReducer = (state = initialState, action) => {
         ...state,
         friends: action.payload,
         isSavingFriend: false,
-        hasSavedFriend: true
+        hasSavedFriend: true,
+        newFirstName: "",
+        newLastName: "",
+        newAge: "",
+        newEmail: ""
       };
     case ADD_FRIEND_FAILURE:
       return {

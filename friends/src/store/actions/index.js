@@ -35,11 +35,11 @@ export const handleTextInputChange = e => dispatch =>
     payload: e.target
   });
 
-export const addFriend = (name, age, email) => dispatch => {
+export const addFriend = (firstname, lastname, age, email) => dispatch => {
   dispatch({ type: ADD_FRIEND_START });
   axios
     // Quickly convert age from input string to number with shorthand (+) sign
-    .post(`${baseURL}/api/friends`, { name, age: +age, email })
+    .post(`${baseURL}/api/friends`, { firstname, lastname, age: +age, email })
     .then(res => dispatch({ type: ADD_FRIEND_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: ADD_FRIEND_FAILURE, payload: err }));
 };

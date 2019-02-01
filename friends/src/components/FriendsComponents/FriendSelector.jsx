@@ -8,8 +8,9 @@ class FriendSelector extends Component {
   static propTypes = {
     friends: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+        firstname: PropTypes.string.isRequired,
+        lastname: PropTypes.string.isRequired,
         // Allow string type to be able to set controlled age input to be empty
         age: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
           .isRequired,
@@ -44,7 +45,7 @@ class FriendSelector extends Component {
               key={friend.id}
               value={friend.id}
             >
-              {friend.name}
+              {`${friend.firstname} ${friend.lastname}`}
             </option>
           ))}
         </select>
