@@ -16,7 +16,7 @@ import {
 
 let initialState = {
   newName: "",
-  newAge: "",
+  newAge: 0,
   newEmail: "",
   friends: [],
   isFetchingFriends: false,
