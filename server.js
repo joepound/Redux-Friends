@@ -76,6 +76,9 @@ let friends = [
     email: "dan@lambdaschool.com"
   }
 ];
+friends.sort((a, b) =>
+  a.firstname.toLowerCase() > b.firstname.toLowerCase() ? 1 : -1
+);
 
 app.use(bodyParser.json());
 
@@ -101,6 +104,9 @@ app.post("/api/friends", (req, res) => {
   const friend = { id: generateId(), ...req.body };
 
   friends = [...friends, friend];
+  friends.sort((a, b) =>
+    a.firstname.toLowerCase() > b.firstname.toLowerCase() ? 1 : -1
+  );
 
   res.send(friends);
 });
