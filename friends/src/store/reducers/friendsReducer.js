@@ -108,6 +108,31 @@ const friendsReducer = (state = initialState, action) => {
         isQueryingFriend: false,
         error: action.payload
       };
+    case DELETE_FRIEND_START:
+      return {
+        ...state,
+        isDeletingFriend: true,
+        hasDeletedFriend: false,
+        error: null
+      };
+    case DELETE_FRIEND_SUCCESS:
+      return {
+        ...state,
+        friends: action.payload,
+        selectedFriend: null,
+        isDeletingFriend: false,
+        hasDeletedFriend: true,
+        newFirstName: "",
+        newLastName: "",
+        newAge: "",
+        newEmail: ""
+      };
+    case DELETE_FRIEND_FAILURE:
+      return {
+        ...state,
+        isDeletingFriend: false,
+        error: action.payload
+      };
     default:
       return state;
   }

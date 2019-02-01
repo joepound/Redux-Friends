@@ -51,3 +51,11 @@ export const queryFriendInfo = e => dispatch => {
     .then(res => dispatch({ type: SELECT_FRIEND_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: SELECT_FRIEND_FAILURE, payload: err }));
 };
+
+export const deleteFriend = id => dispatch => {
+  dispatch({ type: DELETE_FRIEND_START });
+  axios
+    .delete(`${baseURL}/api/friends/${id}`)
+    .then(res => dispatch({ type: DELETE_FRIEND_SUCCESS, payload: res.data }))
+    .catch(err => dispatch({ type: DELETE_FRIEND_FAILURE, payload: err }));
+};

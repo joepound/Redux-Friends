@@ -17,7 +17,8 @@ class FriendSelector extends Component {
         email: PropTypes.string.isRequired
       })
     ).isRequired,
-    getFriends: PropTypes.func.isRequired
+    getFriends: PropTypes.func.isRequired,
+    queryFriendInfo: PropTypes.func.isRequired
   };
 
   componentDidMount() {

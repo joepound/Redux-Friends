@@ -93,7 +93,7 @@ const FriendForm = props => {
           className="friends-app__new-info-form__field__label"
           htmlFor="newEmail"
         >
-          Name:
+          Email Address:
         </label>
         <input
           className="friends-app__new-info-form__field__input"

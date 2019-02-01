@@ -127,7 +127,7 @@ app.put("/api/friends/:id", (req, res) => {
 app.delete("/api/friends/:id", (req, res) => {
   const { id } = req.params;
 
-  friends = friends.filter(f => f.id !== Number(id));
+  friends = friends.filter(f => f.id !== id);
 
   res.send(friends);
 });
