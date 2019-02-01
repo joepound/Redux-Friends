@@ -4,8 +4,11 @@ import {
   FETCH_FRIENDS_FAILURE,
   HANDLE_TEXT_INPUT_CHANGE,
   ADD_FRIEND_START,
-  ADD_FRIEND_FAILURE,
   ADD_FRIEND_SUCCESS,
+  ADD_FRIEND_FAILURE,
+  SELECT_FRIEND_START,
+  SELECT_FRIEND_SUCCESS,
+  SELECT_FRIEND_FAILURE,
   DELETE_FRIEND_START,
   DELETE_FRIEND_SUCCESS,
   DELETE_FRIEND_FAILURE,
@@ -19,10 +22,13 @@ let initialState = {
   newAge: "",
   newEmail: "",
   friends: [],
+  selectedFriend: {},
   isFetchingFriends: false,
   hasFetchedFriends: false,
   isSavingFriend: false,
   hasSavedFriend: false,
+  isQueryingFriend: false,
+  hasQueriedFriend: false,
   isDeletingFriend: false,
   hasDeletedFriend: false,
   isUpdatingFriend: false,
@@ -64,7 +70,7 @@ const friendsReducer = (state = initialState, action) => {
         hasSavedFriend: false,
         error: null
       };
-    case ADD_FRIEND_START:
+    case ADD_FRIEND_SUCCESS:
       return {
         ...state,
         friends: action.payload,
@@ -75,6 +81,26 @@ const friendsReducer = (state = initialState, action) => {
       return {
         ...state,
         isSavingFriend: false,
+        error: action.payload
+      };
+    case SELECT_FRIEND_START:
+      return {
+        ...state,
+        isQueryingFriend: true,
+        hasQueriedFriend: false,
+        error: null
+      };
+    case SELECT_FRIEND_SUCCESS:
+      return {
+        ...state,
+        isQueryingFriend: false,
+        hasQueriedFriend: true,
+        selectedFriend: action.payload
+      };
+    case SELECT_FRIEND_FAILURE:
+      return {
+        ...state,
+        isQueryingFriend: false,
         error: action.payload
       };
     default:

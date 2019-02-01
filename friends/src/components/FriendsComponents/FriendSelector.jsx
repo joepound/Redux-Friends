@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { getFriends } from "../../store/actions";
+import { getFriends, queryFriendInfo } from "../../store/actions";
 
 class FriendSelector extends Component {
   static propTypes = {
@@ -27,7 +27,10 @@ class FriendSelector extends Component {
     return (
       <div className="friends-app__select-friend">
         <label htmlFor="smurfSelect">Your Friend List:</label>
-        <select className="friends-app__select-friend__dropdown">
+        <select
+          className="friends-app__select-friend__dropdown"
+          onChange={this.props.queryFriendInfo}
+        >
           <option
             className="friends-app__select-friend__dropdown__option"
             defaultValue
@@ -39,7 +42,7 @@ class FriendSelector extends Component {
             <option
               className="friends-app__select-friend__dropdown__option"
               key={friend.id}
-              value={friend.name}
+              value={friend.id}
             >
               {friend.name}
             </option>
@@ -59,6 +62,7 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getFriends
+    getFriends,
+    queryFriendInfo
   }
 )(FriendSelector);

@@ -6,8 +6,11 @@ import {
   FETCH_FRIENDS_FAILURE,
   HANDLE_TEXT_INPUT_CHANGE,
   ADD_FRIEND_START,
-  ADD_FRIEND_FAILURE,
   ADD_FRIEND_SUCCESS,
+  ADD_FRIEND_FAILURE,
+  SELECT_FRIEND_START,
+  SELECT_FRIEND_SUCCESS,
+  SELECT_FRIEND_FAILURE,
   DELETE_FRIEND_START,
   DELETE_FRIEND_SUCCESS,
   DELETE_FRIEND_FAILURE,
@@ -23,7 +26,7 @@ export const getFriends = () => dispatch => {
   axios
     .get(`${baseURL}/api/friends`)
     .then(res => dispatch({ type: FETCH_FRIENDS_SUCCESS, payload: res.data }))
-    .catch(error => dispatch({ type: FETCH_FRIENDS_FAILURE, payload: error }));
+    .catch(err => dispatch({ type: FETCH_FRIENDS_FAILURE, payload: err }));
 };
 
 export const handleTextInputChange = e => dispatch =>
@@ -37,6 +40,14 @@ export const addFriend = (name, age, email) => dispatch => {
   axios
     // Quickly convert age from input string to number with shorthand (+) sign
     .post(`${baseURL}/api/friends`, { name, age: +age, email })
-    .then(res => dispatch({ type: ADD_FRIEND_START, payload: res.data }))
-    .catch(error => dispatch({ type: ADD_FRIEND_FAILURE, payload: error }));
+    .then(res => dispatch({ type: ADD_FRIEND_SUCCESS, payload: res.data }))
+    .catch(err => dispatch({ type: ADD_FRIEND_FAILURE, payload: err }));
+};
+
+export const queryFriendInfo = e => dispatch => {
+  dispatch({ type: SELECT_FRIEND_START });
+  axios
+    .get(`${baseURL}/api/friends/${e.currentTarget.value}`)
+    .then(res => dispatch({ type: SELECT_FRIEND_SUCCESS, payload: res.data }))
+    .catch(err => dispatch({ type: SELECT_FRIEND_FAILURE, payload: err }));
 };
