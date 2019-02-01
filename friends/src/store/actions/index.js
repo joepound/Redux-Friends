@@ -26,7 +26,17 @@ export const getFriends = () => dispatch => {
     .catch(error => dispatch({ type: FETCH_FRIENDS_FAILURE, payload: error }));
 };
 
-export const handleTextInputChange = e => dispatch => ({
-  type: HANDLE_TEXT_INPUT_CHANGE,
-  payload: e
-});
+export const handleTextInputChange = e => dispatch =>
+  dispatch({
+    type: HANDLE_TEXT_INPUT_CHANGE,
+    payload: e.target
+  });
+
+export const addFriend = (name, age, email) => dispatch => {
+  dispatch({ type: ADD_FRIEND_START });
+  axios
+    // Quickly convert age from input string to number with shorthand (+) sign
+    .post(`${baseURL}/api/friends`, { name, age: +age, email })
+    .then(res => dispatch({ type: ADD_FRIEND_START, payload: res.data }))
+    .catch(error => dispatch({ type: ADD_FRIEND_FAILURE, payload: error }));
+};

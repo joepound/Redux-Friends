@@ -10,7 +10,9 @@ class FriendSelector extends Component {
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
-        age: PropTypes.number.isRequired,
+        // Allow string type to be able to set controlled age input to be empty
+        age: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+          .isRequired,
         email: PropTypes.string.isRequired
       })
     ).isRequired,

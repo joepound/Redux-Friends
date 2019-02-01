@@ -16,7 +16,7 @@ import {
 
 let initialState = {
   newName: "",
-  newAge: 0,
+  newAge: "",
   newEmail: "",
   friends: [],
   isFetchingFriends: false,
@@ -56,6 +56,26 @@ const friendsReducer = (state = initialState, action) => {
       return {
         ...state,
         [action.payload.name]: action.payload.value
+      };
+    case ADD_FRIEND_START:
+      return {
+        ...state,
+        isSavingFriend: true,
+        hasSavedFriend: false,
+        error: null
+      };
+    case ADD_FRIEND_START:
+      return {
+        ...state,
+        friends: action.payload,
+        isSavingFriend: false,
+        hasSavedFriend: true
+      };
+    case ADD_FRIEND_FAILURE:
+      return {
+        ...state,
+        isSavingFriend: false,
+        error: action.payload
       };
     default:
       return state;
