@@ -22,7 +22,7 @@ let initialState = {
   newAge: "",
   newEmail: "",
   friends: [],
-  selectedFriend: {},
+  selectedFriend: null,
   isFetchingFriends: false,
   hasFetchedFriends: false,
   isSavingFriend: false,

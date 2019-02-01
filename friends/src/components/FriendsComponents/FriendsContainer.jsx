@@ -9,6 +9,7 @@ const FriendsContainer = props => {
     <>
       <FriendForm />
       <FriendSelector />
+      <FriendDisplay />
     </>
   );
 };
